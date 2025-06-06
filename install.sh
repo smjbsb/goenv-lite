@@ -3,14 +3,18 @@
 set -e
 
 INSTALL_DIR="$HOME/.goenv-lite"
-BIN="$INSTALL_DIR/goenv-lite"
+BIN="$INSTALL_DIR/goenv-lite.sh"
+VERSIONS_DIR="$INSTALL_DIR/versions"
+CURRENT_DIR="$INSTALL_DIR/current"
 
 echo "📦 正在安装 goenv-lite 到 $INSTALL_DIR"
 
-# 创建目录
+# 创建目录结构
 mkdir -p "$INSTALL_DIR"
+mkdir -p "$VERSIONS_DIR"
+mkdir -p "$CURRENT_DIR"
 
-# 下载主程序（你这里替换成你GitHub的raw地址）
+# 下载主程序（替换成你的实际地址）
 curl -sSf https://raw.githubusercontent.com/smjbsb/goenv-lite/main/goenv-lite.sh -o "$BIN"
 
 # 赋予可执行权限
@@ -23,13 +27,13 @@ if [[ "$SHELL_NAME" == "zsh" ]]; then
   PROFILE_FILE="$HOME/.zshrc"
 fi
 
-# 添加 PATH 配置（如果没有配置过）
+# 添加 PATH 和 alias 配置（避免重复添加）
 if ! grep -q 'goenv-lite' "$PROFILE_FILE"; then
   {
     echo ''
     echo '# goenv-lite 环境变量'
     echo 'export PATH="$HOME/.goenv-lite:$PATH"'
-    echo "alias g=\"$BIN\""
+    echo "alias g='$BIN'"
     echo ''
   } >> "$PROFILE_FILE"
   echo "✅ 已自动写入 $PROFILE_FILE，包含 PATH 和 alias 配置"
@@ -41,6 +45,6 @@ echo ""
 echo "✅ 安装完成！请执行以下命令使配置生效："
 echo "source $PROFILE_FILE"
 echo ""
-echo "然后你可以用命令 'g' 来调用 goenv-lite，比如："
+echo "之后你可以用 'g' 命令进行管理，比如："
 echo "g install go1.22.0"
 echo "g switch"
