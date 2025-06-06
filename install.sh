@@ -3,7 +3,7 @@
 set -e
 
 INSTALL_DIR="$HOME/.goenv-lite"
-BIN="$INSTALL_DIR/goenv-lite.sh"
+BIN="$INSTALL_DIR/goenv-lite"
 VERSIONS_DIR="$INSTALL_DIR/versions"
 CURRENT_DIR="$INSTALL_DIR/current"
 
