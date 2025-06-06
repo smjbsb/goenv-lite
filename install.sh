@@ -3,7 +3,7 @@
 set -e
 
 INSTALL_DIR="$HOME/.goenv-lite"
-BIN="$INSTALL_DIR/goenv-lite.sh"
+BIN="$INSTALL_DIR/goenv-lite"
 
 echo "📦 正在安装 goenv-lite 到 $INSTALL_DIR"
 
@@ -11,7 +11,7 @@ echo "📦 正在安装 goenv-lite 到 $INSTALL_DIR"
 mkdir -p "$INSTALL_DIR"
 
 # 下载主程序（你这里替换成你GitHub的raw地址）
-curl -sSf https://raw.githubusercontent.com/smjbsb/goenv-lite/main/goenv-lite -o "$BIN"
+curl -sSf https://raw.githubusercontent.com/smjbsb/goenv-lite/main/goenv-lite.sh -o "$BIN"
 
 # 赋予可执行权限
 chmod +x "$BIN"
