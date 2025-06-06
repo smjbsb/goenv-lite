@@ -11,7 +11,7 @@ echo "📦 正在安装 goenv-lite 到 $INSTALL_DIR"
 mkdir -p "$INSTALL_DIR"
 
 # 下载主程序
-curl -sSf https://raw.githubusercontent.com/<你的GitHub用户名>/<仓库名>/main/go-switch.sh -o "$BIN"
+curl -sSf https://raw.githubusercontent.com/smjbsb/goenv-lite/refs/heads/main/goenv-lite.sh -o "$BIN"
 
 # 赋予可执行权限
 chmod +x "$BIN"
