@@ -27,12 +27,24 @@ if [[ "$SHELL_NAME" == "zsh" ]]; then
   PROFILE_FILE="$HOME/.zshrc"
 fi
 
+# 检测已有的GOROOT配置
+OLD_GOROOT=$(grep -E '^export GOROOT=' "$PROFILE_FILE" | head -n1 | cut -d= -f2- | tr -d '"')
+# 检测PATH中是否有go路径
+OLD_GO_PATH=$(echo "$PATH" | tr ':' '\n' | grep -E 'go' | head -n1)
+
 # 添加 PATH 和 alias 配置（避免重复添加）
 if ! grep -q 'goenv-lite' "$PROFILE_FILE"; then
   {
     echo ''
-    echo '# goenv-lite 环境变量'
-    echo 'export PATH="$HOME/.goenv-lite:$PATH"'
+    echo '# goenv-lite 环境变量（兼容原有 Go 环境）'
+    if [ -n "$OLD_GOROOT" ]; then
+      echo "# 备份原 GOROOT: $OLD_GOROOT"
+    fi
+    if [ -n "$OLD_GO_PATH" ]; then
+      echo "# 备份原 PATH 中 Go 路径: $OLD_GO_PATH"
+    fi
+    echo "export GOROOT=\"$CURRENT_DIR\""
+    echo 'export PATH="$GOROOT/bin:$PATH"'
     echo "alias g='$BIN'"
     echo ''
   } >> "$PROFILE_FILE"
